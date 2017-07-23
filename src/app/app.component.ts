@@ -20,7 +20,7 @@ import { PostsService } from './posts/posts.service';
   ],
   template: `
     <header>
-
+      <app-navbar></app-navbar>
     </header>
       <router-outlet></router-outlet>
     <footer>

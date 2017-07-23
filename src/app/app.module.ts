@@ -29,6 +29,7 @@ import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
 import { HomeComponent } from './home';
+import { NavbarComponent} from './navbar';
 import { NoContentComponent } from './no-content';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -55,6 +56,7 @@ type StoreType = {
   declarations: [
     AppComponent,
     HomeComponent,
+    NavbarComponent,
     NoContentComponent,
   ],
   /**
