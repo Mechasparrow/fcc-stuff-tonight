@@ -1,3 +1,12 @@
 <div class = "container-fluid">
   <h1>This is the home page...</h1>
+
+  <form #searchForm = "ngForm" (ngSubmit) = "searchBars()">
+    <div class = "form-group">
+      <input [(ngModel)] = "searchquery" class = "form-control" type = "text" name = "location" required placeholder = "Give me your location">
+      <br>
+      <button [disabled] = "!searchForm.form.valid" class = "btn btn-default">Search</button>
+    </div>
+  </form>
+
 </div>

@@ -3,29 +3,43 @@ import yelp from 'yelp-fusion';
 
 const router = express.Router();
 
-var clientId = process.env.YELP_ID;
-var clientSecret = process.env.YELP_SECRET;
 
+function searchBars(location) {
+  var clientId = process.env.YELP_ID;
+  var clientSecret = process.env.YELP_SECRET;
 
-
-router.route('/')
-  //Get a list of bars in an area /api/yelp
-  .get(function (req, res) {
-    console.log(yelp);
-
+  var promise = new Promise(function (resolve, reject) {
     yelp.accessToken(clientId, clientSecret).then(function (response) {
       const client = yelp.client(response.jsonBody.access_token);
 
       client.search({
         term: 'Bar',
-        location: 'St. Louis, mo'
+        location: location
       }).then (function (response) {
-        res.json(response.jsonBody);
+        resolve(response.jsonBody);
       })
     }).catch(function (err) {
+      reject(err);
+    })
+  });
+
+  return promise;
+
+}
+
+router.route('/')
+  //Get a list of bars in an area /api/yelp
+  .get(function (req, res) {
+
+    var location = req.query.location;
+    console.log(location);
+
+    searchBars(location).then (function (data) {
+      res.json(data);
+    }).catch (function (err) {
       res.json(err);
     })
-    
+
   })
 
 export default router;
